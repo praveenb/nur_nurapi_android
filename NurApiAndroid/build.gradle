@@ -23,13 +23,13 @@ android {
     buildToolsVersion '28.0.3'
 
     /* Always remove NurApi.jar when doing clean build. Will downloaded in preBuild step */
-    clean << {
+   /* clean << {
         def f = new File('NurApiAndroid/libs/NurApi.jar')
         if (f.exists()) {
             println 'Deleted NurApi.jar'
             f.delete();
         }
-    }
+    }*/
 
     /* Download NurApi.jar if missing */
     /*

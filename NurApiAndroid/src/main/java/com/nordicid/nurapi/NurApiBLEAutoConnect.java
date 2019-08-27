@@ -48,7 +48,7 @@ public class NurApiBLEAutoConnect implements UartServiceEvents, NurApiAutoConnec
 	// Reader / accessory address.
 	private String mAddr = "";
 	
-	boolean mServiceBound = false;
+	private boolean mServiceBound = false;
 
 	private int mLastRemoteRssi = 0;
 
@@ -78,6 +78,7 @@ public class NurApiBLEAutoConnect implements UartServiceEvents, NurApiAutoConnec
             }
     		else
     		{
+				mServiceBound =true;
     			mService.setEventListener(NurApiBLEAutoConnect.this, mContext);
     			if (!NurApiBLEAutoConnect.this.mAddr.equals("") && mService.getConnState() != UartService.STATE_CONNECTED)
     				mService.connect(NurApiBLEAutoConnect.this.mAddr);
@@ -86,6 +87,7 @@ public class NurApiBLEAutoConnect implements UartServiceEvents, NurApiAutoConnec
 
 		@Override
         public void onServiceDisconnected(ComponentName classname) {
+			mServiceBound =false;
         		mService = null;
         }
     };
@@ -342,7 +344,7 @@ public class NurApiBLEAutoConnect implements UartServiceEvents, NurApiAutoConnec
 			e.printStackTrace();
 		}
 
-		if (mService != null) {
+		if (mService != null&&mContext!=null) {
 			Log.d(TAG, "onStopInternal() close service");
 			if (mServiceBound) {
 				mServiceBound = false;

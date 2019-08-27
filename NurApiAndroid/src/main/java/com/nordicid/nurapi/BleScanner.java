@@ -150,7 +150,18 @@ public class BleScanner {
     }
 
     static public Set<BluetoothDevice> getPairedDevices() {
-        BluetoothManager bluetoothManager = (BluetoothManager)getInstance().mOwner.getSystemService(Context.BLUETOOTH_SERVICE);
+        Log.i(TAG,"getPairedDevices() " );
+        BleScanner bleScanner = getInstance();
+
+        if(bleScanner == null){
+            return new HashSet<BluetoothDevice>();
+        }
+
+        if(bleScanner.mOwner == null){
+            return new HashSet<BluetoothDevice>();
+        }
+
+        BluetoothManager bluetoothManager = (BluetoothManager)bleScanner.mOwner.getSystemService(Context.BLUETOOTH_SERVICE);
         if (bluetoothManager == null) {
             return new HashSet<BluetoothDevice>();
         }

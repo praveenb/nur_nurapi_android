@@ -48,7 +48,7 @@ android {
             if ("${variant.name}" == "debug")
                 outputFileName = "NurApiAndroid_${variant.name}.aar"
             else
-                outputFileName = "NurApiAndroid.aar"
+                outputFileName = "NurApiAndroid_${variant.name}v.aar"
         }
     }
 
